@@ -19,13 +19,21 @@ function SignIn() {
   const [password, setPassword] = useState('');
 
   const handleSubmit = () => {
-    fetch('http://localhost:3000/users/signin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    fetch("https://hacka-tweet-back-five.vercel.app/users/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
-    }).then(response => response.json())
-      .then(data => {
-        data.result && dispatch(login({ token: data.token, firstName: data.firstName, username: data.username }));
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        data.result &&
+          dispatch(
+            login({
+              token: data.token,
+              firstName: data.firstName,
+              username: data.username,
+            })
+          );
       });
   };
 

@@ -12,23 +12,26 @@ function Tweet(props) {
   const user = useSelector((state) => state.user.value);
 
   const handleLike = () => {
-    fetch('http://localhost:3000/tweets/like', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+    fetch("https://hacka-tweet-back-five.vercel.app/tweets/like", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: user.token, tweetId: props._id }),
-    }).then(response => response.json())
-      .then(data => {
-        data.result && dispatch(likeTweet({ tweetId: props._id, username: user.username }));
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        data.result &&
+          dispatch(likeTweet({ tweetId: props._id, username: user.username }));
       });
   };
 
   const handleDelete = () => {
-    fetch('http://localhost:3000/tweets', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
+    fetch("https://hacka-tweet-back-five.vercel.app/tweets", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: user.token, tweetId: props._id }),
-    }).then(response => response.json())
-      .then(data => {
+    })
+      .then((response) => response.json())
+      .then((data) => {
         data.result && dispatch(deleteTweet(props._id));
       });
   };

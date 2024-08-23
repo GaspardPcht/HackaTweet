@@ -27,9 +27,9 @@ function Home() {
       return;
     }
 
-    fetch(`http://localhost:3000/tweets/all/${user.token}`)
-      .then(response => response.json())
-      .then(data => {
+    fetch(`https://hacka-tweet-back-five.vercel.app/tweets/all/${user.token}`)
+      .then((response) => response.json())
+      .then((data) => {
         data.result && dispatch(loadTweets(data.tweets));
       });
   }, []);
@@ -41,16 +41,17 @@ function Home() {
   };
 
   const handleSubmit = () => {
-    fetch('http://localhost:3000/tweets', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    fetch("https://hacka-tweet-back-five.vercel.app/tweets", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: user.token, content: newTweet }),
-    }).then(response => response.json())
-      .then(data => {
+    })
+      .then((response) => response.json())
+      .then((data) => {
         if (data.result) {
           const createdTweet = { ...data.tweet, author: user };
           dispatch(addTweet(createdTweet));
-          setNewTweet('');
+          setNewTweet("");
         }
       });
   };
