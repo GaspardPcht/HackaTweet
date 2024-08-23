@@ -19,6 +19,7 @@ function SignIn() {
   const [password, setPassword] = useState('');
 
   const handleSubmit = () => {
+    console.log('enculer')
     fetch("https://hacka-tweet-back-five.vercel.app/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
